@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum & Datenschutz | Felix Steinmaurer</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@300;400&display=swap%22 rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+        :root {
+            --primary: #0056a3;
+            --accent: #ff0000;
+            --dark: #121212;
+            --light: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', sans-serif; background: var(--dark); color: var(--light); overflow-x: hidden; }
+        h1, h2 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
+        header {
+            position: fixed; width: 100%; padding: 20px 50px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(10px); z-index: 1000;
+        }
+        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: bold; transition: 0.3s; }
+        nav a:hover { color: var(--primary); }
+        section { padding: 100px 10% ; min-height: 60vh; }
+        .section-title { font-size: 2.5rem; margin-bottom: 40px; border-left: 5px solid var(--primary); padding-left: 20px; }
+        footer { background: #000; padding: 50px; text-align: center; }
+        .socials { margin-bottom: 20px; }
+        .socials a { color: white; font-size: 1.5rem; margin: 0 15px; text-decoration: none; }
+        @media (max-width: 768px) {
+            header { padding: 20px; flex-direction: column; }
+            nav { margin-top: 15px; }
+        }
+</style>
+</head>
+<body>
+    <header>
+<div class="logo"><strong>FELIX STEINMAURER</strong></div>
+<nav>
+<a href="index.html#home">Home</a>
+<a href="index.html#about">Über mich</a>
+<a href="index.html#topics">Ansichten</a>
+<a href="index.html#gallery">Galerie</a>
+<a href="impressum.html">Impressum</a>
+<a href="index.html#contact">Kontakt</a>
+</nav>
+</header>
+    <section id="impressum" style="background:#111; color:#ccc;">
+        <h2 class="section-title" data-aos="fade-right">Impressum & Datenschutz</h2>
+        <p>Angaben gemäß § 5 TMG:</p>
+        <p>Felix Steinmaurer<br>
+        Musterstraße 1<br>
+        12345 Musterstadt</p>
+        <p>Kontakt: <a href="mailto:info@felixsteinmaurer.at" style="color:#ccc;">info@felixsteinmaurer.at</a></p>
+        <p>© 2026 Felix Steinmaurer</p>
+    </section>
+    <footer>
+<div class="socials">
+<a href="#">X</a> <a href="#">Facebook</a> <a href="#">Instagram</a>
+</div>
+<p>&copy; 2026 Felix Steinmaurer | <a href="impressum.html" style="color: gray;">Impressum & Datenschutz</a></p>
+</footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+      AOS.init({
+        duration: 1000,
+        once: false,
+      });
+</script>
+</body>
+</html>

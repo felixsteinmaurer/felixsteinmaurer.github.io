@@ -1,212 +1,583 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Felix Steinmaurer | Klartext für die Zukunft</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@300;400&display=swap%22 rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felix Steinmaurer | Klartext. Heimat. Sicherheit.</title>
 
-        :root {
+  <!-- FIX: Google Fonts Link war kaputt -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-            --primary: #0056a3; /* Klassisches Blau */
+  <style>
+    :root{
+      --primary:#0b5ed7;     /* kräftiges Blau */
+      --accent:#e60000;      /* rot */
+      --dark:#0b0b0d;        /* dunkler */
+      --panel:#141419;
+      --panel2:#101015;
+      --text:#ffffff;
+      --muted:#b9b9c2;
 
-            --accent: #ff0000;  /* Akzent für Highlights */
+      --ring: rgba(11,94,215,0.35);
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
+      --radius: 16px;
+    }
 
-            --dark: #121212;
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      font-family:'Roboto', sans-serif;
+      background: radial-gradient(1000px 600px at 70% 10%, rgba(11,94,215,0.18), transparent 60%),
+                  radial-gradient(900px 600px at 30% 30%, rgba(230,0,0,0.12), transparent 60%),
+                  var(--dark);
+      color:var(--text);
+      overflow-x:hidden;
+    }
 
-            --light: #ffffff;
+    h1,h2,h3{ font-family:'Montserrat', sans-serif; text-transform:uppercase; letter-spacing:0.5px; }
+    a{ color:inherit; }
 
-        }
- 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Header */
+    header{
+      position:fixed; top:0; left:0; right:0;
+      padding:16px 50px;
+      display:flex; justify-content:space-between; align-items:center;
+      background: rgba(10,10,13,0.78);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      z-index:1000;
+    }
+    .logo{
+      display:flex; align-items:center; gap:12px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+    .badge{
+      width:38px; height:38px;
+      border-radius:10px;
+      background: linear-gradient(135deg, var(--primary), #083a8b);
+      box-shadow: 0 10px 25px rgba(11,94,215,0.25);
+      position:relative;
+    }
+    .badge:before{
+      content:"";
+      position:absolute; inset:9px 10px 10px 9px;
+      border:2px solid rgba(255,255,255,0.7);
+      border-radius:7px;
+      transform: rotate(6deg);
+    }
 
-        body { font-family: 'Roboto', sans-serif; background: var(--dark); color: var(--light); overflow-x: hidden; }
+    nav a{
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:700;
+      opacity:0.92;
+      transition:0.25s;
+      position:relative;
+    }
+    nav a:hover{ color: var(--primary); opacity:1; }
+    nav a:after{
+      content:"";
+      position:absolute; left:0; bottom:-8px;
+      width:0; height:2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition:0.25s;
+    }
+    nav a:hover:after{ width:100%; }
 
-        h1, h2 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
- 
-        /* --- Header --- */
+    /* Hero */
+    .hero{
+      height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      background:
+        linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.75)),
+        url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=2070') center/cover;
+      text-align:center;
+      padding: 110px 20px 0;
+      position:relative;
+    }
+    .hero-content{
+      max-width: 980px;
+    }
 
-        header {
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-weight:700;
+      margin-bottom:18px;
+      box-shadow: var(--shadow);
+    }
+    .dot{
+      width:10px; height:10px;
+      border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(230,0,0,0.15);
+    }
 
-            position: fixed; width: 100%; padding: 20px 50px;
+    .hero-content h1{
+      font-size:4.2rem;
+      line-height:1.05;
+      margin-bottom:14px;
+      text-shadow: 0 10px 35px rgba(0,0,0,0.7);
+    }
+    .hero-content p{
+      font-size:1.35rem;
+      color:#e9e9ef;
+      max-width: 860px;
+      margin: 0 auto 18px;
+      font-style: italic;
+      opacity:0.95;
+    }
+    .hero-sub{
+      font-style: normal !important;
+      color: var(--muted) !important;
+      font-size: 1.1rem !important;
+      margin-top: 8px !important;
+    }
 
-            display: flex; justify-content: space-between; align-items: center;
+    .cta-row{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      margin-top:26px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:0.4px;
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: var(--shadow);
+      transition: 0.22s;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--primary), #073a86);
+    }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 22px 60px rgba(11,94,215,0.28); }
+    .btn-ghost{
+      background: rgba(255,255,255,0.06);
+    }
+    .btn-ghost:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,0.18); }
 
-            background: rgba(18, 18, 18, 0.9); backdrop-filter: blur(10px); z-index: 1000;
+    /* sections */
+    section{ padding: 95px 10%; min-height: 50vh; }
+    .section-title{
+      font-size:2.6rem;
+      margin-bottom: 26px;
+      border-left: 6px solid var(--primary);
+      padding-left: 18px;
+    }
+    .section-lead{
+      color: var(--muted);
+      max-width: 900px;
+      line-height:1.8;
+      margin-bottom: 34px;
+      font-size: 1.08rem;
+    }
 
-        }
+    /* About */
+    .about-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items:center;
+    }
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .about-text{
+      padding: 28px;
+      line-height: 1.85;
+      font-size: 1.08rem;
+      color: #f2f2f7;
+    }
+    .about-text strong{ color: #ffffff; }
+    .pill-row{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top: 16px;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(11,94,215,0.12);
+      border: 1px solid rgba(11,94,215,0.25);
+      color: #dbe8ff;
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
 
-        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: bold; transition: 0.3s; }
+    .about-photo{
+      padding: 14px;
+    }
+    .about-photo img{
+      width:100%;
+      height:auto;
+      border-radius: 14px;
+      display:block;
+    }
 
-        nav a:hover { color: var(--primary); }
- 
-        /* --- Hero Section --- */
+    /* Promise / Values */
+    .promise-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .promise{
+      padding: 22px;
+      border-radius: var(--radius);
+      background: rgba(20,20,25,0.9);
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .promise:before{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(400px 150px at 20% 10%, rgba(230,0,0,0.16), transparent 60%),
+                  radial-gradient(400px 150px at 80% 30%, rgba(11,94,215,0.18), transparent 60%);
+      transform: rotate(6deg);
+      pointer-events:none;
+    }
+    .promise h3{
+      color: #eaf2ff;
+      margin-bottom: 10px;
+      position:relative;
+    }
+    .promise p{ color: var(--muted); line-height:1.7; position:relative; }
+    .icon{
+      width:38px; height:38px;
+      border-radius:12px;
+      background: rgba(11,94,215,0.15);
+      border: 1px solid rgba(11,94,215,0.25);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom: 12px;
+      position:relative;
+    }
+    .icon span{ font-size: 18px; }
 
-        .hero {
+    /* Topics */
+    #topics{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)); }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px;
+    }
+    .card{
+      background: rgba(20,20,25,0.92);
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s, border-color 0.25s;
+      overflow:hidden;
+    }
+    .card:hover{ transform: translateY(-8px); border-color: rgba(11,94,215,0.45); }
+    .card img{
+      width:100%;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display:block;
+    }
+    .card h3{
+      margin-bottom: 10px;
+      color: #cfe3ff;
+    }
+    .card p{
+      color: var(--muted);
+      line-height:1.7;
+      padding-bottom: 6px;
+    }
+    .quote{
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(230,0,0,0.18);
+      background: rgba(230,0,0,0.06);
+      color: #ffd7d7;
+      font-weight: 700;
+      line-height: 1.6;
+    }
 
-            height: 100vh;
+    /* Personality / Brawl Stars */
+    .fun{
+      margin-top: 26px;
+      padding: 22px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(230,0,0,0.08), rgba(11,94,215,0.10));
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: var(--shadow);
+      display:grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 18px;
+      align-items:center;
+    }
+    .fun h3{ margin-bottom: 8px; }
+    .fun p{ color: var(--muted); line-height:1.75; }
+    .statbox{
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .stat{
+      display:flex; justify-content:space-between; gap:10px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.12);
+      color: #eef3ff;
+      font-weight: 800;
+    }
+    .stat:last-child{ border-bottom:none; }
+    .small{ color: var(--muted); font-weight: 700; }
 
-            display: flex; align-items: center; justify-content: center;
+    /* Gallery */
+    #gallery{ background: rgba(255,255,255,0.02); }
+    .gallery-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+    .gallery-grid img{
+      width:100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      transition: transform 0.25s;
+    }
+    .gallery-grid img:hover{ transform: translateY(-6px); }
 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=2070') center/cover;
+    /* Contact footer */
+    footer{
+      background:#050507;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 55px 20px;
+      text-align:center;
+    }
+    .socials{ margin-bottom: 18px; }
+    .socials a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 46px; height: 46px;
+      border-radius: 14px;
+      margin: 0 8px;
+      text-decoration:none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      transition: 0.22s;
+      font-weight: 900;
+    }
+    .socials a:hover{ transform: translateY(-3px); border-color: rgba(11,94,215,0.45); }
 
-            text-align: center; padding: 0 20px;
+    .footer-links a{ color: #8f8f9c; text-decoration:none; }
+    .footer-links a:hover{ color: #cfd6ff; }
 
-        }
-
-        .hero-content h1 { font-size: 4rem; margin-bottom: 10px; }
-
-        .hero-content p { font-size: 1.5rem; max-width: 800px; margin: auto; font-style: italic; }
- 
-        /* --- Sektionen Allgemein --- */
-
-        section { padding: 100px 10% ; min-height: 60vh; }
-
-        .section-title { font-size: 2.5rem; margin-bottom: 40px; border-left: 5px solid var(--primary); padding-left: 20px; }
- 
-        /* --- Über Mich --- */
-
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-
-        .about-text { font-size: 1.1rem; line-height: 1.8; }
- 
-        /* --- Politische Schwerpunkte Cards --- */
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-        .card {
-
-            background: #1e1e1e; padding: 40px; border-radius: 10px;
-
-            transition: transform 0.3s, border-color 0.3s; border: 1px solid transparent;
-
-        }
-
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-
-        .card h3 { margin-bottom: 15px; color: var(--primary); }
- 
-        /* --- Footer --- */
-
-        footer { background: #000; padding: 50px; text-align: center; }
-
-        .socials { margin-bottom: 20px; }
-
-        .socials a { color: white; font-size: 1.5rem; margin: 0 15px; text-decoration: none; }
- 
-        /* gallery styles */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-
-            .hero-content h1 { font-size: 2.5rem; }
-
-            .about-grid { grid-template-columns: 1fr; }
-
-            header { padding: 20px; flex-direction: column; }
-
-            nav { margin-top: 15px; }
-
-        }
-</style>
+    /* Responsive */
+    @media (max-width: 900px){
+      header{ padding: 16px 18px; flex-direction:column; gap: 10px; }
+      nav{ margin-top: 6px; }
+      section{ padding: 85px 6%; }
+      .hero-content h1{ font-size: 2.8rem; }
+      .about-grid{ grid-template-columns: 1fr; }
+      .fun{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
- 
-    <header>
-<div class="logo"><strong>FELIX STEINMAURER</strong></div>
-<nav>
-<a href="#home">Home</a>
-<a href="#about">Über mich</a>
-<a href="#topics">Ansichten</a>
-<a href="#gallery">Galerie</a>
-<a href="impressum.html">Impressum</a>
-<a href="#contact">Kontakt</a>
-</nav>
-</header>
- 
-    <section class="hero" id="home">
-<div class="hero-content" data-aos="zoom-out" data-aos-duration="1500">
-<p>„Klartext für die Zukunft.“</p>
-<h1>Felix Steinmaurer</h1>
-<p>„Leidenschaftlich, direkt und konsequent. Ich stehe für eine Politik mit Rückgrat.“</p>
-</div>
-</section>
- 
-    <section id="about">
-<h2 class="section-title" data-aos="fade-right">Über mich</h2>
-<div class="about-grid">
-<div class="about-text" data-aos="fade-up">
-<p>Authentizität ist in der Politik kein Schlagwort, sondern eine Verpflichtung. Mein Weg ist geprägt von Bodenständigkeit und dem festen Glauben daran, dass wir unsere Heimat aktiv gestalten müssen, anstatt sie nur zu verwalten.</p>
-<br>
-<p>Hier erfährst du mehr über meinen Werdegang und was mich jeden Tag antreibt, mich für die Bürger einzusetzen.</p>
-</div>
-<div data-aos="flip-left">
-    <img src="pictures/Bild.png" alt="Felix Steinmaurer" style="width:100%; height:auto; border-radius:10px;" />
-</div>
-</div>
-</section>
- 
-    <section id="topics" style="background: #181818;">
-<h2 class="section-title" data-aos="fade-right">Politische Schwerpunkte</h2>
-<div class="grid">
-<div class="card" data-aos="fade-up" data-aos-delay="100">
-    <img src="pictures/kickl-134.jpg" alt="Herbert Kickl" style="width:100%; border-radius:8px; margin-bottom:10px;" />
-<h3>Geradlinigkeit</h3>
-<p>„Ich schätze an Herbert Kickl die Fähigkeit, unbequeme Wahrheiten auszusprechen, ohne sich dem Zeitgeist zu beugen.“</p>
-</div>
-<div class="card" data-aos="fade-up" data-aos-delay="200">
-    <img src="pictures/20113455_500.jpg" alt="Lokale Traditionen" style="width:100%; border-radius:8px; margin-bottom:10px;" />
-<h3>Heimatliebe</h3>
-<p>Der Schutz unserer lokalen Interessen und Traditionen steht an erster Stelle. Identität bewahren statt aufgeben.</p>
-</div>
-<div class="card" data-aos="fade-up" data-aos-delay="300">
-    <img src="pictures/filters_quality(100).webp" alt="Sicherheit und Freiheit" style="width:100%; border-radius:8px; margin-bottom:10px;" />
-<h3>Sicherheit & Freiheit</h3>
-<p>Ein starker Rechtsstaat, der die individuellen Freiheiten schützt, anstatt sie durch Überregulierung einzuschränken.</p>
-</div>
-</div>
-</section>
+  <header>
+    <div class="logo">
+      <div class="badge" aria-hidden="true"></div>
+      <div>
+        <div style="font-weight:900;">FELIX STEINMAURER</div>
+        <div style="font-size:0.85rem; color:var(--muted); font-weight:700;">Klartext • Heimat • Sicherheit</div>
+      </div>
+    </div>
 
-    <section id="gallery" style="background: #181818;">
-<h2 class="section-title" data-aos="fade-right">Galerie</h2>
-<div class="gallery-grid" data-aos="fade-up">
-    <img src="pictures/Bild.png" alt="Felix Steinmaurer">
-    <img src="pictures/kickl-134.jpg" alt="Herbert Kickl">
-    <img src="pictures/20113455_500.jpg" alt="">
-    <img src="pictures/filters_quality(100).webp" alt="">
-</div>
-</section>
- 
-    <footer id="contact">
-<div class="socials">
-<a href="#">X</a> <a href="#">Facebook</a> <a href="#">Instagram</a>
-</div>
-<p>&copy; 2026 Felix Steinmaurer | <a href="impressum.html" style="color: gray;">Impressum & Datenschutz</a></p>
-</footer>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">Über mich</a>
+      <a href="#values">Wofür ich stehe</a>
+      <a href="#topics">Ansichten</a>
+      <a href="#gallery">Galerie</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
 
+  <section class="hero" id="home">
+    <div class="hero-content" data-aos="zoom-out" data-aos-duration="1500">
+      <div class="kicker"><span class="dot"></span> Klartext, nicht Kleingedrucktes.</div>
+      <h1>Felix Steinmaurer</h1>
+      <p>„Leidenschaftlich, direkt und konsequent. Politik mit Rückgrat – für Menschen, die arbeiten, anpacken und Verantwortung leben.“</p>
+      <p class="hero-sub">Für eine starke Heimat, klare Regeln und echte Bürgernähe – ohne Theater.</p>
 
- 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">📩 Kontakt aufnehmen</a>
+        <a class="btn btn-ghost" href="#topics">🛡️ Positionen ansehen</a>
+      </div>
+    </div>
+  </section>
 
-      AOS.init({
+  <section id="about">
+    <h2 class="section-title" data-aos="fade-right">Über mich</h2>
+    <p class="section-lead" data-aos="fade-up">
+      Ich glaube an einen Staat, der schützt – und an Bürger, die gestalten. Nicht alles weichspülen: Probleme ansprechen, Lösungen liefern.
+      <br>Hier siehst du kurz, wer ich bin – und wofür ich stehe.
+    </p>
 
-        duration: 1000,
+    <div class="about-grid">
+      <div class="panel about-text" data-aos="fade-up">
+        <p>
+          <strong>Authentizität</strong> ist für mich kein PR-Wort, sondern eine Verpflichtung.
+          Mein Weg ist geprägt von <strong>Bodenständigkeit</strong>, Verantwortung und dem Willen, unsere Heimat aktiv zu stärken – statt nur zu verwalten.
+        </p>
+        <br>
+        <p>
+          Ich höre zu, ich entscheide, ich stehe dazu. Politik muss wieder <strong>verständlich</strong> sein – und <strong>konsequent</strong> handeln,
+          wenn Regeln gebrochen werden.
+        </p>
 
-        once: false,
+        <div class="pill-row">
+          <div class="pill">🇦🇹 Heimat & Identität</div>
+          <div class="pill">⚖️ Rechtsstaat</div>
+          <div class="pill">🛡️ Sicherheit</div>
+          <div class="pill">🗣️ Klartext</div>
+        </div>
+      </div>
 
-      });
-</script>
+      <div class="panel about-photo" data-aos="flip-left">
+        <img src="pictures/Bild.png" alt="Felix Steinmaurer" />
+      </div>
+    </div>
+  </section>
+
+  <section id="values">
+    <h2 class="section-title" data-aos="fade-right">Wofür ich stehe</h2>
+    <p class="section-lead" data-aos="fade-up">
+      Drei klare Prinzipien. Ohne Ausreden. Ohne Drama.
+    </p>
+
+    <div class="promise-grid">
+      <div class="promise" data-aos="fade-up" data-aos-delay="100">
+        <div class="icon"><span>🛡️</span></div>
+        <h3>Schutz statt Schönreden</h3>
+        <p>Ein Staat muss seine Bürger schützen – mit klaren Regeln und konsequenter Umsetzung.</p>
+      </div>
+
+      <div class="promise" data-aos="fade-up" data-aos-delay="200">
+        <div class="icon"><span>🏠</span></div>
+        <h3>Heimat bewahren</h3>
+        <p>Traditionen, Sprache, Zusammenhalt: Identität stärken – nicht auflösen.</p>
+      </div>
+
+      <div class="promise" data-aos="fade-up" data-aos-delay="300">
+        <div class="icon"><span>⚖️</span></div>
+        <h3>Freiheit mit Verantwortung</h3>
+        <p>Freiheit braucht Ordnung. Wer Regeln bricht, muss mit Konsequenzen rechnen.</p>
+      </div>
+    </div>
+
+    <!-- Brawl Stars / Persönlichkeit -->
+    <div class="fun" data-aos="fade-up" data-aos-delay="350">
+      <div>
+        <h3>Auch persönlich: Felix ist richtig tuff 😄</h3>
+        <p>
+          Ja, Politik kann ernst sein – aber ein Mensch ist mehr als nur Parolen.
+          Felix zockt auch <strong>Brawl Stars</strong> und ist dort (Zitat) <strong>„richtig tuff“</strong>.
+          Dieser Ehrgeiz: Fokus, Timing, nicht einknicken – das zieht sich auch durch seinen Stil.
+        </p>
+        <p class="small">*(Falls du echte Stats eintragen willst: Trophäen/Rank/Top-Brawler – sag kurz, dann trag ich’s clean ein.)*</p>
+      </div>
+      <div class="statbox" aria-label="Brawl Stars Stats (Demo)">
+        <div class="stat"><span>Spielstil</span><span class="small">aggressiv & smart</span></div>
+        <div class="stat"><span>Stärke</span><span class="small">Clutch-Momente</span></div>
+        <div class="stat"><span>Vibe</span><span class="small">tuff, stabil</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <h2 class="section-title" data-aos="fade-right">Politische Schwerpunkte</h2>
+    <p class="section-lead" data-aos="fade-up">
+      Kurz, klar, ohne Politiker-Blabla.
+    </p>
+
+    <div class="grid">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <img src="pictures/kickl-134.jpg" alt="Herbert Kickl" />
+        <h3>Geradlinigkeit</h3>
+        <p>Ich respektiere klare Kante und direkte Worte – vor allem wenn’s unbequem wird.</p>
+        <div class="quote">„Unbequeme Wahrheiten sind oft der Anfang von echten Lösungen.“</div>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <img src="pictures/20113455_500.jpg" alt="Lokale Traditionen" />
+        <h3>Heimatliebe</h3>
+        <p>Schutz unserer lokalen Interessen und Traditionen. Identität bewahren statt aufgeben.</p>
+      </div>
+
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <img src="pictures/filters_quality(100).webp" alt="Sicherheit und Freiheit" />
+        <h3>Sicherheit & Freiheit</h3>
+        <p>Ein starker Rechtsstaat, der Freiheiten schützt – und Regeln durchsetzt, statt sie nur aufzuschreiben.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2 class="section-title" data-aos="fade-right">Galerie</h2>
+    <p class="section-lead" data-aos="fade-up">
+      Eindrücke, Momente, Nähe zu den Leuten.
+    </p>
+
+    <div class="gallery-grid" data-aos="fade-up">
+      <img src="pictures/Bild.png" alt="Felix Steinmaurer">
+      <img src="pictures/kickl-134.jpg" alt="Herbert Kickl">
+      <img src="pictures/20113455_500.jpg" alt="">
+      <img src="pictures/filters_quality(100).webp" alt="">
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="socials">
+      <a href="#" aria-label="X">X</a>
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">ig</a>
+    </div>
+
+    <p style="max-width:900px; margin: 0 auto; color: var(--muted); line-height:1.7;">
+      <strong style="color:#fff;">Kontakt:</strong> Schreib mir direkt – Anliegen, Kritik oder Vorschläge.
+      Politik soll wieder erreichbar sein.
+    </p>
+
+    <div class="footer-links" style="margin-top:18px;">
+      <p>&copy; 2026 Felix Steinmaurer • <a href="impressum.html">Impressum & Datenschutz</a></p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false
+    });
+  </script>
 </body>
 </html>
- 
